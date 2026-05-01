@@ -9,9 +9,23 @@
 
     <ul>
       <li *ngFor="let todo of todos$ | async">
-        {{ todo.text }}
-        <button (click)="completeTodo(todo.id)">✔</button>
-      </li>
+
+        <!--  EDIT MODE -->
+        <div *ngIf="editingId === todo.id; else viewMode">
+          <input [(ngModel)]="editedText" />
+          <button (click)="saveEdit(todo.id)">Save</button>
+        </div>
+
+        <!--  VIEW MODE -->
+        <ng-template #viewMode>
+          {{ todo.text }}
+
+          <button (click)="startEdit(todo)">✏️</button>
+          <button (click)="completeTodo(todo.id)">✔</button>
+          <button (click)="deleteTodo(todo.id)">🗑️</button>
+        </ng-template>
+
+       </li>
     </ul>
 
 </ng-container>
