@@ -7,7 +7,8 @@ import {
   query,
   where,
   updateDoc,
-  doc
+  doc,
+  deleteDoc
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
@@ -34,6 +35,20 @@ export class TodoService {
       completed: false,
       userId: user.uid,
       createdAt: new Date()
+    });
+  }
+
+  // 🔹 Delete todo
+  deleteTodo(id: string) {
+    const todoRef = doc(this.firestore, `todos/${id}`);
+    return deleteDoc(todoRef);
+  }
+
+  // 🔹 Edit todo
+  updateTodo(id: string, newText: string) {
+    const todoRef = doc(this.firestore, `todos/${id}`);
+    return updateDoc(todoRef, {
+      text: newText
     });
   }
 
