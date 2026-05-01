@@ -14,7 +14,8 @@ import { Observable } from 'rxjs';
   styleUrl: './in-progress.scss',
 })
 export class InProgress implements OnInit {
-
+  editingId: string | null = null;
+  editedText = '';
   newTodo = '';
   todos$!: Observable<any[]>;
 
@@ -36,5 +37,22 @@ export class InProgress implements OnInit {
 
   completeTodo(id: string) {
     this.todoService.toggleTodo(id, true);
+  }
+
+  deleteTodo(id: string) {
+    this.todoService.deleteTodo(id);
+  }
+
+  startEdit(todo: any) {
+    this.editingId = todo.id;
+    this.editedText = todo.text;
+  }
+
+  saveEdit(id: string) {
+    if (!this.editedText.trim()) return;
+
+    this.todoService.updateTodo(id, this.editedText);
+    this.editingId = null;
+    this.editedText = '';
   }
 }
