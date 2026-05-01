@@ -9,5 +9,5 @@ import { Navbar } from './components/navbar/navbar';
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('ToDoList');
+  protected readonly title = signal('to-do-list');
 }
