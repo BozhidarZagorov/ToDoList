@@ -7,7 +7,9 @@
  <ul>
   <li *ngFor="let todo of todos$ | async">
     {{ todo.text }}
+    
     <button (click)="undoTodo(todo.id)">↩</button>
+    <button (click)="deleteTodo(todo.id)">🗑️</button>
   </li>
  </ul>
 
