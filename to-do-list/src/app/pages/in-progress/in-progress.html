@@ -1,1 +1,29 @@
-<p>in-progress works!</p>
+<ng-container *ngIf="auth.user$ | async as user; else notLogged">
+
+  <div class="auth-warning">
+    <h2>In Progress Tasks</h2>
+
+    <input [(ngModel)]="newTodo" placeholder="New task..." />
+    <button (click)="addTodo()">Add</button>
+  </div>
+
+    <ul>
+      <li *ngFor="let todo of todos$ | async">
+        {{ todo.text }}
+        <button (click)="completeTodo(todo.id)">✔</button>
+      </li>
+    </ul>
+
+</ng-container>
+
+<ng-template #notLogged>
+  <div class="auth-warning">
+    <h2>Please log in</h2>
+    <p>
+      Please login to view your todo list or register if you don’t have an account yet.
+    </p>
+
+    <button routerLink="/login">Login</button>
+    <button routerLink="/register">Register</button>
+  </div>
+</ng-template>
