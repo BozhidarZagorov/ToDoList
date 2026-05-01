@@ -9,7 +9,18 @@
   </div>
 
   <div class="navbar-right">
-    <button routerLink="/login">Login</button>
-    <button routerLink="/register">Register</button>
+
+    <!-- 🔴 NOT logged in -->
+    <ng-container *ngIf="!(auth.user$ | async)">
+      <button routerLink="/login">Login</button>
+      <button routerLink="/register">Register</button>
+    </ng-container>
+
+    <!-- 🟢 LOGGED in -->
+    <ng-container *ngIf="auth.user$ | async as user">
+      <span class="user-email">{{ user.email }}</span>
+      <button (click)="logout()">Logout</button>
+    </ng-container>
+
   </div>
 </nav>

@@ -1,10 +1,25 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { Auths } from '../../auth/auth';
+import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink],
+  standalone: true,
+  imports: [RouterLink, AsyncPipe, CommonModule],
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
-export class Navbar {}
+export class Navbar {
+
+  constructor(
+    public auth: Auths,
+    private router: Router
+  ) {}
+
+  logout() {
+    this.auth.logout().then(() => {
+      this.router.navigate(['/login']);
+    });
+  }
+}
