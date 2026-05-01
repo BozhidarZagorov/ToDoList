@@ -28,4 +28,7 @@ export class Completed implements OnInit {
   undoTodo(id: string) {
     this.todoService.toggleTodo(id, false);
   }
+  deleteTodo(id: string) {
+    this.todoService.deleteTodo(id);
+  }
 }
