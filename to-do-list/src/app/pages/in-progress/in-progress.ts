@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Auths } from '../../auth/auth';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { TodoService } from '../../todos/todo';
+import { TodoService, TodoStatus } from '../../todos/todo';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 
@@ -14,10 +14,15 @@ import { Observable } from 'rxjs';
   styleUrl: './in-progress.scss',
 })
 export class InProgress implements OnInit {
+
+  // 🔹 UI state
   editingId: string | null = null;
   editedText = '';
   newTodo = '';
-  todos$!: Observable<any[]>;
+
+  // 🔹 Streams
+  notStarted$!: Observable<any[]>;
+  inProgress$!: Observable<any[]>;
 
   constructor(
     public auth: Auths,
@@ -25,9 +30,11 @@ export class InProgress implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.todos$ = this.todoService.getTodos(false);
+    this.notStarted$ = this.todoService.getTodosByStatus('not-started');
+    this.inProgress$ = this.todoService.getTodosByStatus('in-progress');
   }
 
+  // 🔹 Add
   addTodo() {
     if (!this.newTodo.trim()) return;
 
@@ -35,14 +42,26 @@ export class InProgress implements OnInit {
     this.newTodo = '';
   }
 
-  completeTodo(id: string) {
-    this.todoService.toggleTodo(id, true);
+  // 🔹 Move to "in progress"
+  startTask(id: string) {
+    this.todoService.updateStatus(id, 'in-progress');
   }
 
+  moveToNotStarted(id: string) {
+  this.todoService.updateStatus(id, 'not-started');
+}
+
+  // 🔹 Move to "completed"
+  completeTodo(id: string) {
+    this.todoService.updateStatus(id, 'completed');
+  }
+
+  // 🔹 Delete
   deleteTodo(id: string) {
     this.todoService.deleteTodo(id);
   }
 
+  // 🔹 Edit
   startEdit(todo: any) {
     this.editingId = todo.id;
     this.editedText = todo.text;
@@ -52,6 +71,11 @@ export class InProgress implements OnInit {
     if (!this.editedText.trim()) return;
 
     this.todoService.updateTodo(id, this.editedText);
+    this.editingId = null;
+    this.editedText = '';
+  }
+
+  cancelEdit() {
     this.editingId = null;
     this.editedText = '';
   }
