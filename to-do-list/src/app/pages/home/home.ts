@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { Auths } from '../../auth/auth';
 import { TodoService } from '../../todos/todo';
 import { map } from 'rxjs/operators';
-import { inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   imports: [CommonModule, AsyncPipe, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -18,11 +19,16 @@ export class Home {
 
   user$ = this.auth.user$;
 
-  inProgressCount$ = this.todoService.getTodos(false).pipe(
-    map(todos => todos.length)
-  );
+  inProgressCount$!: Observable<number>;
+  completedCount$!: Observable<number>;
 
-  completedCount$ = this.todoService.getTodos(true).pipe(
-    map(todos => todos.length)
-  );
+  constructor() {
+    this.inProgressCount$ = this.todoService.getTodosByStatus('in-progress').pipe(
+      map(todos => todos.length)
+    );
+
+    this.completedCount$ = this.todoService.getTodosByStatus('completed').pipe(
+      map(todos => todos.length)
+    );
+  }
 }
