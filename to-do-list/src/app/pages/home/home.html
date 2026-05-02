@@ -1,2 +1,22 @@
-<h1>Homepage</h1>
-<p>Welcome to your ToDo app</p>
+<div class="home-container" *ngIf="user$ | async as user; else loggedOut">
+  <div class="home-card">
+    <h1>Welcome</h1>
+    <h2> {{ user.email }} </h2>
+    <p>
+      You have <strong>{{ inProgressCount$ | async }}</strong> todo tasks <button routerLink="/in-progress">in progress</button>
+    </p>
+
+    <p>
+      And <strong>{{ completedCount$ | async }}</strong> tasks <button routerLink="/completed">completed</button>
+    </p>
+  </div>
+</div>
+
+<ng-template #loggedOut>
+  <div class="home-container">
+    <div class="home-card">
+      <h1>Welcome 👋</h1>
+      <p>Please login to see your todo stats</p>
+    </div>
+  </div>
+</ng-template>
