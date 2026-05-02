@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, Injector, runInInjectionContext } from '@angular/core';
 import {
   Firestore,
   collection,
@@ -19,10 +19,9 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TodoService {
 
-  constructor(
-    private firestore: Firestore,
-    private auth: Auth
-  ) {}
+  private firestore = inject(Firestore);
+  private auth = inject(Auth);
+   private injector = inject(Injector);
 
   // 🔹 Add todo
   addTodo(text: string) {
@@ -39,42 +38,45 @@ export class TodoService {
     });
   }
 
-  // 🔹 Delete todo
+   // 🔹 Get todos (FIXED properly)
+  getTodos(completed: boolean): Observable<any[]> {
+  return runInInjectionContext(this.injector, () =>
+    authState(this.auth).pipe(
+      switchMap(user => {
+        if (!user) return of([]);
+
+        return runInInjectionContext(this.injector, () => {
+          const todosRef = collection(this.firestore, 'todos');
+
+          const q = query(
+            todosRef,
+            where('userId', '==', user.uid),
+            where('completed', '==', completed)
+          );
+
+          return collectionData(q, { idField: 'id' }) as Observable<any[]>;
+        });
+      })
+    )
+  );
+}
+
+  // 🔹 Delete
   deleteTodo(id: string) {
-    const todoRef = doc(this.firestore, `todos/${id}`);
-    return deleteDoc(todoRef);
+    return deleteDoc(doc(this.firestore, `todos/${id}`));
   }
 
-  // 🔹 Edit todo
+  // 🔹 Update text
   updateTodo(id: string, newText: string) {
-    const todoRef = doc(this.firestore, `todos/${id}`);
-    return updateDoc(todoRef, {
+    return updateDoc(doc(this.firestore, `todos/${id}`), {
       text: newText
     });
   }
 
-  // 🔹 Get todos (filtered by user + status)
-  getTodos(completed: boolean): Observable<any[]> {
-  return authState(this.auth).pipe(
-    switchMap(user => {
-      if (!user) return of([]);
-
-      const todosRef = collection(this.firestore, 'todos');
-
-      const q = query(
-        todosRef,
-        where('userId', '==', user.uid),
-        where('completed', '==', completed)
-      );
-
-      return collectionData(q, { idField: 'id' }) as Observable<any[]>;
-    })
-  );
-}
-
-  // 🔹 Mark complete / incomplete
+  // 🔹 Toggle complete
   toggleTodo(id: string, completed: boolean) {
-    const todoDoc = doc(this.firestore, `todos/${id}`);
-    return updateDoc(todoDoc, { completed });
+    return updateDoc(doc(this.firestore, `todos/${id}`), {
+      completed
+    });
   }
 }
