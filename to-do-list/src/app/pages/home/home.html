@@ -1,14 +1,23 @@
 <div class="home-container" *ngIf="user$ | async as user; else loggedOut">
   <div class="home-card">
     <h1>Welcome</h1>
-    <h2> {{ user.email }} </h2>
-    <p>
-      You have <strong>{{ inProgressCount$ | async }}</strong> todo tasks <button routerLink="/in-progress">in progress</button>
-    </p>
+    <h2>{{ user.email }}</h2>
 
     <p>
-      And <strong>{{ completedCount$ | async }}</strong> tasks <button routerLink="/completed">completed</button>
+      You have 
+      <strong>{{ inProgressCount$ | async }}</strong> 
+      todo tasks
     </p>
+
+    <button routerLink="/in-progress">View In Progress</button>
+
+    <p>
+      And 
+      <strong>{{ completedCount$ | async }}</strong> 
+      completed tasks
+    </p>
+
+    <button routerLink="/completed">View Completed</button>
   </div>
 </div>
 
@@ -17,6 +26,9 @@
     <div class="home-card">
       <h1>Welcome 👋</h1>
       <p>Please login to see your todo stats</p>
+
+      <button routerLink="/login">Login</button>
+      <button routerLink="/register">Register</button>
     </div>
   </div>
 </ng-template>
