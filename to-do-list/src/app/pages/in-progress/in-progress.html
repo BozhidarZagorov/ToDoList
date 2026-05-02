@@ -1,35 +1,69 @@
 <ng-container *ngIf="auth.user$ | async as user; else notLogged">
 
-  <div class="auth-warning">
-    <h2>In Progress Tasks</h2>
-
+  <!-- ADD TODO -->
+  <div class="top-bar">
     <input [(ngModel)]="newTodo" placeholder="New task..." />
     <button (click)="addTodo()">Add</button>
   </div>
 
-    <ul>
-      <li *ngFor="let todo of todos$ | async">
+  <!-- BOARD -->
+  <div class="board">
 
-        <!--  EDIT MODE -->
-        <div *ngIf="editingId === todo.id; else viewMode">
+    <!-- 🟡 NOT STARTED -->
+    <div class="column">
+      <h3>Not Started</h3>
+
+      <div class="todo-card" *ngFor="let todo of notStarted$ | async">
+
+        <!-- EDIT MODE -->
+        <div *ngIf="editingId === todo.id; else viewModeLeft">
           <input [(ngModel)]="editedText" />
           <button (click)="saveEdit(todo.id)">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
         </div>
 
-        <!--  VIEW MODE -->
-        <ng-template #viewMode>
-          {{ todo.text }}
+        <!-- VIEW MODE -->
+        <ng-template #viewModeLeft>
+          <p>{{ todo.text }}</p>
 
+          <button (click)="startTask(todo.id)">▶ Start</button>
           <button (click)="startEdit(todo)">✏️</button>
-          <button (click)="completeTodo(todo.id)">✔</button>
           <button (click)="deleteTodo(todo.id)">🗑️</button>
         </ng-template>
 
-       </li>
-    </ul>
+      </div>
+    </div>
+
+    <!-- 🔵 IN PROGRESS -->
+    <div class="column">
+      <h3>In Progress</h3>
+
+      <div class="todo-card" *ngFor="let todo of inProgress$ | async">
+
+        <!-- EDIT MODE -->
+        <div *ngIf="editingId === todo.id; else viewModeRight">
+          <input [(ngModel)]="editedText" />
+          <button (click)="saveEdit(todo.id)">Save</button>
+          <button (click)="cancelEdit()">Cancel</button>
+        </div>
+
+        <!-- VIEW MODE -->
+        <ng-template #viewModeRight>
+          <p>{{ todo.text }}</p>
+          <button (click)="moveToNotStarted(todo.id)">↩ Back</button>
+          <button (click)="completeTodo(todo.id)">✔ Done</button>
+          <button (click)="startEdit(todo)">✏️</button>
+          <button (click)="deleteTodo(todo.id)">🗑️</button>
+        </ng-template>
+
+      </div>
+    </div>
+
+  </div>
 
 </ng-container>
 
+<!-- NOT LOGGED -->
 <ng-template #notLogged>
   <div class="auth-warning">
     <h2>Please log in</h2>
