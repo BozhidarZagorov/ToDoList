@@ -11,7 +11,7 @@ export const guestGuard: CanActivateFn = () => {
     map(user => {
       if (user) {
         // already logged in → redirect away
-        router.navigate(['/in-progress']);
+        router.navigate(['/']);
         return false;
       } else {
         return true;
