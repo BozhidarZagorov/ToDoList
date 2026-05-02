@@ -11,7 +11,7 @@ import {
   deleteDoc
 } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -55,7 +55,7 @@ export class TodoService {
   // 🔹 Get todos (filtered by user + status)
   getTodos(completed: boolean): Observable<any[]> {
     const user = this.auth.currentUser;
-    if (!user) return new Observable();
+    if (!user) return of([]);
 
     const todosRef = collection(this.firestore, 'todos');
 
