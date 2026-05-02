@@ -22,12 +22,13 @@ export class Completed implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.todos$ = this.todoService.getTodos(true);
+    this.todos$ = this.todoService.getTodosByStatus('completed');
   }
 
   undoTodo(id: string) {
-    this.todoService.toggleTodo(id, false);
+    this.todoService.updateStatus(id, 'in-progress');
   }
+
   deleteTodo(id: string) {
     this.todoService.deleteTodo(id);
   }
