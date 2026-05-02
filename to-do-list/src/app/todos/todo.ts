@@ -10,8 +10,9 @@ import {
   doc,
   deleteDoc
 } from '@angular/fire/firestore';
-import { Auth } from '@angular/fire/auth';
+import { Auth, authState } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -54,19 +55,22 @@ export class TodoService {
 
   // 🔹 Get todos (filtered by user + status)
   getTodos(completed: boolean): Observable<any[]> {
-    const user = this.auth.currentUser;
-    if (!user) return of([]);
+  return authState(this.auth).pipe(
+    switchMap(user => {
+      if (!user) return of([]);
 
-    const todosRef = collection(this.firestore, 'todos');
+      const todosRef = collection(this.firestore, 'todos');
 
-    const q = query(
-      todosRef,
-      where('userId', '==', user.uid),
-      where('completed', '==', completed)
-    );
+      const q = query(
+        todosRef,
+        where('userId', '==', user.uid),
+        where('completed', '==', completed)
+      );
 
-    return collectionData(q, { idField: 'id' }) as Observable<any[]>;
-  }
+      return collectionData(q, { idField: 'id' }) as Observable<any[]>;
+    })
+  );
+}
 
   // 🔹 Mark complete / incomplete
   toggleTodo(id: string, completed: boolean) {
