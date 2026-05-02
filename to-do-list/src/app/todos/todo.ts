@@ -14,6 +14,8 @@ import { Auth, authState } from '@angular/fire/auth';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
+export type TodoStatus = 'not-started' | 'in-progress' | 'completed';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,9 +23,9 @@ export class TodoService {
 
   private firestore = inject(Firestore);
   private auth = inject(Auth);
-   private injector = inject(Injector);
+  private injector = inject(Injector);
 
-  // 🔹 Add todo
+  // 🔹 Add todo (NEW: uses status instead of completed)
   addTodo(text: string) {
     const user = this.auth.currentUser;
     if (!user) return;
@@ -32,51 +34,51 @@ export class TodoService {
 
     return addDoc(todosRef, {
       text,
-      completed: false,
+      status: 'not-started', // ✅ default state
       userId: user.uid,
       createdAt: new Date()
     });
   }
 
-   // 🔹 Get todos (FIXED properly)
-  getTodos(completed: boolean): Observable<any[]> {
-  return runInInjectionContext(this.injector, () =>
-    authState(this.auth).pipe(
-      switchMap(user => {
-        if (!user) return of([]);
+  // 🔹 Get todos by status (MAIN QUERY)
+  getTodosByStatus(status: TodoStatus): Observable<any[]> {
+    return runInInjectionContext(this.injector, () =>
+      authState(this.auth).pipe(
+        switchMap(user => {
+          if (!user) return of([]);
 
-        return runInInjectionContext(this.injector, () => {
-          const todosRef = collection(this.firestore, 'todos');
+          return runInInjectionContext(this.injector, () => {
+            const todosRef = collection(this.firestore, 'todos');
 
-          const q = query(
-            todosRef,
-            where('userId', '==', user.uid),
-            where('completed', '==', completed)
-          );
+            const q = query(
+              todosRef,
+              where('userId', '==', user.uid),
+              where('status', '==', status)
+            );
 
-          return collectionData(q, { idField: 'id' }) as Observable<any[]>;
-        });
-      })
-    )
-  );
-}
+            return collectionData(q, { idField: 'id' }) as Observable<any[]>;
+          });
+        })
+      )
+    );
+  }
 
-  // 🔹 Delete
+  // 🔹 Update status (move between columns)
+  updateStatus(id: string, status: TodoStatus) {
+    const todoDoc = doc(this.firestore, `todos/${id}`);
+    return updateDoc(todoDoc, { status });
+  }
+
+  // 🔹 Delete todo
   deleteTodo(id: string) {
     return deleteDoc(doc(this.firestore, `todos/${id}`));
   }
 
-  // 🔹 Update text
+  // 🔹 Edit text
   updateTodo(id: string, newText: string) {
-    return updateDoc(doc(this.firestore, `todos/${id}`), {
+    const todoDoc = doc(this.firestore, `todos/${id}`);
+    return updateDoc(todoDoc, {
       text: newText
-    });
-  }
-
-  // 🔹 Toggle complete
-  toggleTodo(id: string, completed: boolean) {
-    return updateDoc(doc(this.firestore, `todos/${id}`), {
-      completed
     });
   }
 }
