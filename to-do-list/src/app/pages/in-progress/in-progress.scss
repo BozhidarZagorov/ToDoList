@@ -123,6 +123,15 @@ button:hover {
 .delete-btn:hover {
   background: #ff4d4f;
 }
+
+.edit-btn {
+  background: #3498db;
+}
+
+.edit-btn:hover {
+  background: #4aa8e8;
+}
+
 .auth-warning {
   height: calc(100vh - 60px);
   display: flex;
