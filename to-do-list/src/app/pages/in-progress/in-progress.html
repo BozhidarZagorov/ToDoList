@@ -2,7 +2,7 @@
 
   <!-- ADD TODO -->
   <div class="top-bar">
-    <input [(ngModel)]="newTodo" placeholder="New task..." />
+    <input class="glass-input" [(ngModel)]="newTodo" placeholder="New task..." />
     <button (click)="addTodo()">Add</button>
   </div>
 
@@ -16,11 +16,13 @@
       <div class="todo-card" *ngFor="let todo of notStarted$ | async">
 
         <!-- EDIT MODE -->
-        <div *ngIf="editingId === todo.id; else viewModeLeft">
-          <input [(ngModel)]="editedText" />
-          <button (click)="saveEdit(todo.id)">Save</button>
-          <button (click)="cancelEdit()">Cancel</button>
-        </div>
+         <div class="edit-field">
+           <div *ngIf="editingId === todo.id; else viewModeLeft">
+             <input class="glass-input" [(ngModel)]="editedText" />
+             <button (click)="saveEdit(todo.id)">Save</button>
+             <button (click)="cancelEdit()">Cancel</button>
+            </div>
+          </div>
 
         <!-- VIEW MODE -->
         <ng-template #viewModeLeft>
@@ -41,11 +43,13 @@
       <div class="todo-card" *ngFor="let todo of inProgress$ | async">
 
         <!-- EDIT MODE -->
-        <div *ngIf="editingId === todo.id; else viewModeRight">
-          <input [(ngModel)]="editedText" />
-          <button (click)="saveEdit(todo.id)">Save</button>
-          <button (click)="cancelEdit()">Cancel</button>
-        </div>
+         <div class="edit-field">
+           <div *ngIf="editingId === todo.id; else viewModeRight">
+             <input class="glass-input" [(ngModel)]="editedText" />
+             <button (click)="saveEdit(todo.id)">Save</button>
+             <button (click)="cancelEdit()">Cancel</button>
+            </div>
+          </div>
 
         <!-- VIEW MODE -->
         <ng-template #viewModeRight>
