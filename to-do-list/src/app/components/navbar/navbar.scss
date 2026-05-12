@@ -22,22 +22,33 @@
   padding: 0;
 }
 
-.navbar-center,
+.navbar-center {
+  display: flex;
+  gap: 10px;
+  margin-left: 4rem
+}
 .navbar-right {
   display: flex;
   gap: 10px;
 }
 
 button {
-  background: transparent;
-  border: 1px solid #444;
-  color: white;
-  padding: 6px 12px;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
-  border-radius: 6px;
+
+  background: #e1880c;
+  color: white;
+  font-weight: 500;
+
   transition: 0.2s;
 }
 
 button:hover {
-  background: #333;
+  background: #ffa600;
+}
+
+.user-email {
+  margin-top: 0.2rem;
 }
