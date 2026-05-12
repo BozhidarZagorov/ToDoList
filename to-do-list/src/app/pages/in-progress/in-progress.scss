@@ -13,7 +13,7 @@
 }
 
 .column {
-  width: 320px;
+  width: 380px;
   border-radius: 16px;
   padding: 1rem;
 
@@ -51,7 +51,20 @@ h3 {
 
 button {
   margin-right: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  border: none;
   cursor: pointer;
+
+  background: #e1880c;
+  color: white;
+  font-weight: 500;
+
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #ffa600;
 }
 
 .auth-warning {
