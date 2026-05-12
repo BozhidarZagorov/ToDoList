@@ -28,9 +28,9 @@
         <ng-template #viewModeLeft>
           <p>{{ todo.text }}</p>
 
-          <button (click)="startTask(todo.id)">▶ Start</button>
+          <button class="done-btn" (click)="startTask(todo.id)">▶ Start</button>
           <button (click)="startEdit(todo)">✏️ Edit</button>
-          <button (click)="deleteTodo(todo.id)">🗑️ Delete</button>
+          <button class="delete-btn" (click)="deleteTodo(todo.id)">🗑️ Delete</button>
         </ng-template>
 
       </div>
@@ -46,18 +46,18 @@
          <div class="edit-field">
            <div *ngIf="editingId === todo.id; else viewModeRight">
              <input class="glass-input" [(ngModel)]="editedText" />
-             <button (click)="saveEdit(todo.id)">Save</button>
-             <button (click)="cancelEdit()">Cancel</button>
+             <button class="done-btn" (click)="saveEdit(todo.id)">Save</button>
+             <button class="delete-btn" (click)="cancelEdit()">Cancel</button>
             </div>
           </div>
 
         <!-- VIEW MODE -->
         <ng-template #viewModeRight>
           <p>{{ todo.text }}</p>
+          <button class="done-btn" (click)="completeTodo(todo.id)">✔ Done</button>
           <button (click)="moveToNotStarted(todo.id)">↩ Back</button>
-          <button (click)="completeTodo(todo.id)">✔ Done</button>
           <button (click)="startEdit(todo)">✏️ Edit</button>
-          <button (click)="deleteTodo(todo.id)">🗑️ Delete</button>
+          <button class="delete-btn" (click)="deleteTodo(todo.id)">🗑️ Delete</button>
         </ng-template>
 
       </div>

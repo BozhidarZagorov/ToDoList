@@ -108,6 +108,21 @@ button:hover {
   background: #ffa600;
 }
 
+.done-btn {
+  background: #1faa59;
+}
+
+.done-btn:hover {
+  background: #28c76f;
+}
+
+.delete-btn {
+  background: #d63031;
+}
+
+.delete-btn:hover {
+  background: #ff4d4f;
+}
 .auth-warning {
   height: calc(100vh - 60px);
   display: flex;
