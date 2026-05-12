@@ -1,3 +1,97 @@
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* MAIN COLUMN */
+.column {
+  width: 500px;
+
+  border-radius: 18px;
+  padding: 1.5rem;
+
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.column h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* TODO CARD */
+.todo-card {
+  background: rgba(255, 255, 255, 0.10);
+
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+
+  box-shadow:
+    0 6px 15px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+
+  transition: 0.2s ease;
+}
+
+.todo-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 25px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.todo-card p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  color: white;
+}
+
+/* BUTTON GROUP */
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* BUTTONS */
+button {
+  border: none;
+  border-radius: 10px;
+
+  padding: 0.5rem 0.9rem;
+
+  cursor: pointer;
+
+  color: white;
+  font-weight: 600;
+
+  transition: 0.2s ease;
+}
+
+/* UNDO */
+.back-btn {
+  background: #3498db;
+}
+
+.back-btn:hover {
+  background: #4aa8e8;
+}
+
+/* DELETE */
+.delete-btn {
+  background: #d63031;
+}
+
+.delete-btn:hover {
+  background: #ff4d4f;
+}
+
 .auth-warning {
   display: flex;
   flex-direction: column;

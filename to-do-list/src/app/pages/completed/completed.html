@@ -1,23 +1,35 @@
 <ng-container *ngIf="auth.user$ | async as user; else notLogged">
 
-<div class="auth-warning">
-    <h2>Completed Tasks</h2>    
-</div>
+  <div class="page-wrapper">
 
- <ul>
-  <li *ngFor="let todo of todos$ | async">
-    {{ todo.text }}
-    
-    <button (click)="undoTodo(todo.id)">↩</button>
-    <button (click)="deleteTodo(todo.id)">🗑️</button>
-  </li>
- </ul>
+    <div class="column">
+      <h2>Completed Tasks</h2>
+
+      <div class="todo-card" *ngFor="let todo of todos$ | async">
+
+        <p>{{ todo.text }}</p>
+
+        <div class="buttons">
+          <button class="back-btn" (click)="undoTodo(todo.id)">
+            ↩ Undo
+          </button>
+
+          <button class="delete-btn" (click)="deleteTodo(todo.id)">
+            🗑️ Delete
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 
 </ng-container>
 
 <ng-template #notLogged>
   <div class="auth-warning">
     <h2>Please log in</h2>
+
     <p>
       Please login to view your todo list or register if you don’t have an account yet.
     </p>
