@@ -27,8 +27,8 @@
           <p>{{ todo.text }}</p>
 
           <button (click)="startTask(todo.id)">▶ Start</button>
-          <button (click)="startEdit(todo)">✏️</button>
-          <button (click)="deleteTodo(todo.id)">🗑️</button>
+          <button (click)="startEdit(todo)">✏️ Edit</button>
+          <button (click)="deleteTodo(todo.id)">🗑️ Delete</button>
         </ng-template>
 
       </div>
@@ -52,8 +52,8 @@
           <p>{{ todo.text }}</p>
           <button (click)="moveToNotStarted(todo.id)">↩ Back</button>
           <button (click)="completeTodo(todo.id)">✔ Done</button>
-          <button (click)="startEdit(todo)">✏️</button>
-          <button (click)="deleteTodo(todo.id)">🗑️</button>
+          <button (click)="startEdit(todo)">✏️ Edit</button>
+          <button (click)="deleteTodo(todo.id)">🗑️ Delete</button>
         </ng-template>
 
       </div>
