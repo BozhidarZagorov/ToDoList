@@ -38,7 +38,8 @@
         <!-- EDIT MODE -->
          <div class="edit-field">
            <div *ngIf="editingId === todo.id; else viewModeLeft">
-             <input class="glass-input" [(ngModel)]="editedText" />
+             <input class="glass-input" [(ngModel)]="editedTitle" />
+             <input class="glass-input" [(ngModel)]="editedDescription" />
              <button (click)="saveEdit(todo.id)">Save</button>
              <button (click)="cancelEdit()">Cancel</button>
             </div>
