@@ -18,8 +18,8 @@ export class InProgress implements OnInit {
 
   // 🔹 UI state
   editingId: string | null = null;
-  editedText = '';
-  newTodo = '';
+  editedTitle = '';
+  editedDescription = '';
 
   // 🔹 Streams
   notStarted$!: Observable<any[]>;
@@ -65,7 +65,8 @@ export class InProgress implements OnInit {
   // 🔹 Edit
   startEdit(todo: any) {
     this.editingId = todo.id;
-    this.editedText = todo.text;
+    this.editedTitle = todo.title
+    this.editedDescription = todo.description
   }
 
   saveEdit(id: string) {
@@ -78,7 +79,8 @@ export class InProgress implements OnInit {
 
   cancelEdit() {
     this.editingId = null;
-    this.editedText = '';
+    this.editedTitle = '';
+    this.editedDescription = '';
   }
 
 
