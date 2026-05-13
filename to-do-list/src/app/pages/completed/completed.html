@@ -7,7 +7,24 @@
 
       <div class="todo-card" *ngFor="let todo of todos$ | async">
 
-        <p>{{ todo.text }}</p>
+        <h4>{{ todo.title }}</h4>
+
+          <p class="description">
+            {{ todo.description }}
+          </p>
+
+          <p class="date">
+              Added:
+              {{ todo.createdAt?.toDate() | date:'medium' }}
+          </p>
+          <p class="date">
+             Started:
+             {{ todo.startedAt?.toDate() | date:'medium' }}
+          </p>
+          <p class="date">
+            Finished:
+            {{ todo.completedAt?.toDate() | date:'medium' }}
+          </p>
 
         <div class="buttons">
           <button class="back-btn" (click)="undoTodo(todo.id)">
