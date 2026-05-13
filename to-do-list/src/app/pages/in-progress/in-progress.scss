@@ -173,6 +173,29 @@ button:hover {
   background: #4aa8e8;
 }
 
+.cdk-drag-preview {
+  border-radius: 14px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.35);
+
+  transform: rotate(2deg);
+
+  opacity: 0.95;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.25;
+}
+
+.cdk-drop-list-dragging .todo-card {
+  transition: transform 0.2s;
+}
+
+.column.cdk-drop-list-receiving {
+  outline: 2px dashed rgba(255,255,255,0.3);
+}
+
 .auth-warning {
   height: calc(100vh - 60px);
   display: flex;
