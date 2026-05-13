@@ -56,6 +56,8 @@
   justify-content: center;
   gap: 2rem;
   padding: 2rem;
+
+  align-items: flex-start;
 }
 
 .column {
@@ -72,6 +74,40 @@
 h3 {
   text-align: center;
   margin-bottom: 1rem;
+}
+
+h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.description {
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.date {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+
+  resize: vertical;
+
+  padding: 1rem;
+
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+
+  background: rgba(255,255,255,0.08);
+
+  color: white;
+
+  margin-top: 1rem;
 }
 
 /* TODO CARD */
