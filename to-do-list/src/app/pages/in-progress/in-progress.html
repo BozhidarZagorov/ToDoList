@@ -2,7 +2,16 @@
 
   <!-- ADD TODO -->
   <div class="top-bar">
-    <input class="glass-input" [(ngModel)]="newTodo" placeholder="New task..." />
+    <input
+      class="glass-input"
+      [(ngModel)]="newTitle"
+      placeholder="Task title..."
+    />
+    <textarea
+      class="glass-input"
+      [(ngModel)]="newDescription"
+      placeholder="Task description..."
+    ></textarea>
     <button (click)="addTodo()">Add</button>
   </div>
 
