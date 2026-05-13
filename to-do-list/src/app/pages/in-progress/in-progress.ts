@@ -20,6 +20,8 @@ export class InProgress implements OnInit {
   editingId: string | null = null;
   editedTitle = '';
   editedDescription = '';
+  newTitle = '';
+  newDescription = '';
 
   // 🔹 Streams
   notStarted$!: Observable<any[]>;
@@ -37,10 +39,12 @@ export class InProgress implements OnInit {
 
   // 🔹 Add
   addTodo() {
-    if (!this.newTodo.trim()) return;
+    if (!this.newTitle.trim()) return;
+    if (!this.newDescription.trim()) return;
 
-    this.todoService.addTodo(this.newTodo);
-    this.newTodo = '';
+    this.todoService.addTodo(this.newTitle,this.newDescription);
+    this.newTitle = '';
+    this.newDescription = '';
   }
 
   // 🔹 Move to "in progress"
