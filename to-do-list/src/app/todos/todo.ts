@@ -71,9 +71,30 @@ export class TodoService {
 
   // 🔹 Update status (move between columns)
   updateStatus(id: string, status: TodoStatus) {
-    const todoDoc = doc(this.firestore, `todos/${id}`);
-    return updateDoc(todoDoc, { status });
+  const todoRef = doc(this.firestore, `todos/${id}`);
+
+  const data: any = {
+    status
+  };
+
+  // when task starts
+  if (status === 'in-progress') {
+    data.startedAt = new Date();
   }
+
+  // when task completes
+  if (status === 'completed') {
+    data.completedAt = new Date();
+  }
+
+  // when moved back to not-started
+  if (status === 'not-started') {
+    data.startedAt = null;
+    data.completedAt = null;
+  }
+
+  return updateDoc(todoRef, data);
+}
 
   // 🔹 Delete todo
   deleteTodo(id: string) {
