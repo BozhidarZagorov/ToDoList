@@ -74,11 +74,13 @@ export class InProgress implements OnInit {
   }
 
   saveEdit(id: string) {
-    if (!this.editedText.trim()) return;
+    if (!this.editedTitle.trim()) return;
+    if (!this.editedDescription.trim()) return;
 
-    this.todoService.updateTodo(id, this.editedText);
+    this.todoService.updateTodo(id, this.editedTitle, this.editedDescription);
     this.editingId = null;
-    this.editedText = '';
+    this.editedTitle = '';
+    this.editedDescription = '';
   }
 
   cancelEdit() {
