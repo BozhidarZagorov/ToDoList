@@ -47,7 +47,16 @@
 
         <!-- VIEW MODE -->
         <ng-template #viewModeLeft>
-          <p>{{ todo.text }}</p>
+          <h4>{{ todo.title }}</h4>
+
+            <p class="description">
+              {{ todo.description }}
+            </p>
+            
+            <p class="date">
+              Added:
+              {{ todo.createdAt?.toDate() | date:'medium' }}
+            </p>
 
           <button class="done-btn" (click)="startTask(todo.id)">▶ Start</button>
           <button class="edit-btn" (click)="startEdit(todo)">✏️ Edit</button>
@@ -74,7 +83,20 @@
 
         <!-- VIEW MODE -->
         <ng-template #viewModeRight>
-          <p>{{ todo.text }}</p>
+          <p>{{ todo.title }}</p>
+
+           <p class="description">
+              {{ todo.description }}
+            </p>
+
+            <p class="date">
+              Added:
+              {{ todo.createdAt?.toDate() | date:'medium' }}
+            </p>
+            <p class="date">
+              Started:
+              {{ todo.startedAt?.toDate() | date:'medium' }}
+            </p>
           <button class="done-btn" (click)="completeTodo(todo.id)">✔ Done</button>
           <button (click)="moveToNotStarted(todo.id)">↩ Back</button>
           <button class="edit-btn" (click)="startEdit(todo)">✏️ Edit</button>
