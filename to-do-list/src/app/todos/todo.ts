@@ -25,20 +25,26 @@ export class TodoService {
   private auth = inject(Auth);
   private injector = inject(Injector);
 
-  // 🔹 Add todo (NEW: uses status instead of completed)
-  addTodo(text: string) {
-    const user = this.auth.currentUser;
-    if (!user) return;
+  // 🔹 Add todo
+  addTodo(title: string, description: string) {
+  const user = this.auth.currentUser;
+  if (!user) return;
 
-    const todosRef = collection(this.firestore, 'todos');
+  const todosRef = collection(this.firestore, 'todos');
 
-    return addDoc(todosRef, {
-      text,
-      status: 'not-started', // ✅ default state
-      userId: user.uid,
-      createdAt: new Date()
-    });
-  }
+  return addDoc(todosRef, {
+    title,
+    description,
+
+    status: 'not-started',
+
+    userId: user.uid,
+
+    createdAt: new Date(),
+    startedAt: null,
+    completedAt: null
+  });
+}
 
   // 🔹 Get todos by status (MAIN QUERY)
   getTodosByStatus(status: TodoStatus): Observable<any[]> {
