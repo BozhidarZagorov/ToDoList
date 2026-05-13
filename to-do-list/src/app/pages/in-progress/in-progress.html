@@ -19,7 +19,13 @@
   <div class="board">
 
     <!-- 🟡 NOT STARTED -->
-    <div class="column">
+    <div
+      cdkDropList
+      id="notStartedList"
+      [cdkDropListData]="notStarted$ | async"
+      [cdkDropListConnectedTo]="['inProgressList']"
+      (cdkDropListDropped)="drop($event)"
+    >
       <h3>Not Started</h3>
 
       <div class="todo-card" *ngFor="let todo of notStarted$ | async">
