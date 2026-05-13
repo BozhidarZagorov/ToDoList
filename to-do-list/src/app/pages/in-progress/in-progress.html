@@ -67,15 +67,26 @@
     </div>
 
     <!-- 🔵 IN PROGRESS -->
-    <div class="column">
+    <div
+      cdkDropList
+      id="inProgressList"
+      [cdkDropListData]="inProgress$ | async"
+      [cdkDropListConnectedTo]="['notStartedList']"
+      (cdkDropListDropped)="drop($event)"
+    >
       <h3>In Progress</h3>
-
-      <div class="todo-card" *ngFor="let todo of inProgress$ | async">
+      <div
+        class="todo-card"
+        *ngFor="let todo of inProgress$ | async"
+        cdkDrag
+        [cdkDragData]="todo"
+      >
 
         <!-- EDIT MODE -->
          <div class="edit-field">
            <div *ngIf="editingId === todo.id; else viewModeRight">
-             <input class="glass-input" [(ngModel)]="editedText" />
+             <input class="glass-input" [(ngModel)]="editedTitle" />
+             <input class="glass-input" [(ngModel)]="editedDescription" />
              <button class="done-btn" (click)="saveEdit(todo.id)">Save</button>
              <button class="delete-btn" (click)="cancelEdit()">Cancel</button>
             </div>
