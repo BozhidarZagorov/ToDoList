@@ -5,11 +5,12 @@ import { RouterLink } from '@angular/router';
 import { TodoService, TodoStatus } from '../../todos/todo';
 import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-in-progress',
   standalone: true,
-  imports: [CommonModule, AsyncPipe, RouterLink, FormsModule],
+  imports: [CommonModule, AsyncPipe, RouterLink, FormsModule, DragDropModule],
   templateUrl: './in-progress.html',
   styleUrl: './in-progress.scss',
 })
@@ -79,4 +80,26 @@ export class InProgress implements OnInit {
     this.editingId = null;
     this.editedText = '';
   }
+
+
+  drop(event: CdkDragDrop<any[] | null, any[] | null>) {
+
+  const todo = event.item.data;
+
+  // move to in progress
+  if (
+    event.previousContainer.id === 'notStartedList' &&
+    event.container.id === 'inProgressList'
+  ) {
+    this.todoService.updateStatus(todo.id, 'in-progress');
+  }
+
+  // move back to not started
+  if (
+    event.previousContainer.id === 'inProgressList' &&
+    event.container.id === 'notStartedList'
+  ) {
+    this.todoService.updateStatus(todo.id, 'not-started');
+  }
+}
 }
