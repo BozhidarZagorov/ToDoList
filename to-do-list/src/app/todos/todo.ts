@@ -101,11 +101,17 @@ export class TodoService {
     return deleteDoc(doc(this.firestore, `todos/${id}`));
   }
 
-  // 🔹 Edit text
-  updateTodo(id: string, newText: string) {
+ // 🔹 Edit todo
+  updateTodo(
+    id: string,
+    title: string,
+    description: string
+  ) {
     const todoDoc = doc(this.firestore, `todos/${id}`);
+
     return updateDoc(todoDoc, {
-      text: newText
+      title,
+      description
     });
   }
 }
