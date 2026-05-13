@@ -28,7 +28,12 @@
     >
       <h3>Not Started</h3>
 
-      <div class="todo-card" *ngFor="let todo of notStarted$ | async">
+      <div
+        class="todo-card"
+        *ngFor="let todo of notStarted$ | async"
+        cdkDrag
+        [cdkDragData]="todo"
+      >
 
         <!-- EDIT MODE -->
          <div class="edit-field">
