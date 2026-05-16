@@ -45,12 +45,22 @@ export class InProgress implements OnInit {
     public auth: Auths,
     private todoService: TodoService
   ) {}
+  
 
   ngOnInit() {
     this.notStarted$ = this.todoService.getTodosByStatus('not-started');
     this.inProgress$ = this.todoService.getTodosByStatus('in-progress');
-  }
+    
 
+    this.notStarted$.subscribe(todos => {
+      this.notStartedCount = todos.length;
+    });
+
+    this.inProgress$.subscribe(todos => {
+      this.inProgressCount = todos.length;
+    });
+  }
+  
   // 🔹 Add
   addTodo() {
     if (!this.newTitle.trim()) return;
