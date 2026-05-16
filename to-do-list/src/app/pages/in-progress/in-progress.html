@@ -64,6 +64,7 @@
             </p>
 
           <button class="done-btn" (click)="startTask(todo.id)">▶ Start</button>
+          <button (click)="openDetails(todo)">Details</button>
           <button class="edit-btn" (click)="startEdit(todo)">✏️ Edit</button>
           <button class="delete-btn" (click)="deleteTodo(todo.id)">🗑️ Delete</button>
         </ng-template>
