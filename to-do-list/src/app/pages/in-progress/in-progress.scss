@@ -153,6 +153,45 @@ textarea {
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
+.todo-card p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+
+  word-break: break-word;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0,0,0,0.6);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+.modal {
+  width: 70%;
+  max-width: 900px;
+
+  padding: 2rem;
+  border-radius: 24px;
+
+  background: rgba(30,30,30,0.95);
+
+  text-align: center;
+  color: white;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
 button {
   margin-right: 0.4rem;
   padding: 0.4rem 0.8rem;
