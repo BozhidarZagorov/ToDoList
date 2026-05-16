@@ -147,6 +147,26 @@
     </div>
     
   </div>
+  
+  <div class="modal-overlay" *ngIf="selectedTodo">
+
+  <div class="modal">
+
+    <button class="delete-btn" (click)="closeDetails()">✖</button>
+
+    <h2>Title: {{ selectedTodo.title }}</h2>
+
+    <p>Description: {{ selectedTodo.description }}</p>
+
+    <p>Created: {{ selectedTodo.createdAt?.toDate() | date }}</p>
+
+    <p *ngIf="selectedTodo.startedAt">
+      Started: {{ selectedTodo.startedAt?.toDate() | date }}
+    </p>
+
+  </div>
+
+</div>
 
 </ng-container>
 
