@@ -38,8 +38,8 @@ export class InProgress implements OnInit {
   newDescription = '';
 
   // 🔹 Streams
-  notStarted$!: Observable<any[]>;
-  inProgress$!: Observable<any[]>;
+  notStarted$!: Observable<Todo[]>;
+  inProgress$!: Observable<Todo[]>;
 
   constructor(
     public auth: Auths,
