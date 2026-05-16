@@ -129,8 +129,23 @@
         </ng-template>
 
       </div>
+      
     </div>
+    <div
+      class="column complete-drop"
+      [class.visible]="showCompleteDrop"
+      cdkDropList
+      id="completedList"
+      [cdkDropListConnectedTo]="['inProgressList']"
+      (cdkDropListDropped)="drop($event)"
+      >
+      <h3>Complete Task</h3>
 
+      <div class="complete-zone">
+        ✔ Drop here to complete
+      </div>
+    </div>
+    
   </div>
 
 </ng-container>
