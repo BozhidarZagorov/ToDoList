@@ -120,6 +120,16 @@ export class InProgress implements OnInit {
     this.editedDescription = '';
   }
 
+  dragStarted(todo: any) {
+  this.isDragging = true;
+
+  this.showCompleteDrop = todo.status === 'in-progress';
+}
+
+  dragEnded() {
+  this.isDragging = false;
+  this.showCompleteDrop = false;
+}
 
   drop(event: CdkDragDrop<any[] | null, any[] | null>) {
 
