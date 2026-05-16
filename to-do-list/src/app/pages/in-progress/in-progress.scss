@@ -51,9 +51,26 @@
 
 }
 
+.empty-column {
+  min-height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 12px;
+
+  color: rgba(255,255,255,0.5);
+
+  margin-top: 1rem;
+}
+
 .board {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+
   gap: 2rem;
   padding: 2rem;
 
