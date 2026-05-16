@@ -74,18 +74,25 @@
 
     <!-- 🔵 IN PROGRESS -->
     <div
+      class="column"
       cdkDropList
       id="inProgressList"
-      [cdkDropListData]="inProgress$ | async"
-      [cdkDropListConnectedTo]="['notStartedList']"
+      *ngIf="(inProgress$ | async) as inProgress"
+      [cdkDropListData]="inProgress"
+      [cdkDropListConnectedTo]="['notStartedList', 'completedList']"
       (cdkDropListDropped)="drop($event)"
-    >
+      >
       <h3>In Progress</h3>
+      <div class="empty-column" *ngIf="inProgressCount === 0">
+        Drop tasks here
+      </div>
       <div
         class="todo-card"
         *ngFor="let todo of inProgress$ | async"
         cdkDrag
         [cdkDragData]="todo"
+        (cdkDragStarted)="dragStarted(todo)"
+        (cdkDragEnded)="dragEnded()"
       >
 
         <!-- EDIT MODE -->
