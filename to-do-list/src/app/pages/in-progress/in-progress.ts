@@ -77,8 +77,8 @@ export class InProgress implements OnInit {
   }
 
   moveToNotStarted(id: string) {
-  this.todoService.updateStatus(id, 'not-started');
-}
+    this.todoService.updateStatus(id, 'not-started');
+  }
 
   // 🔹 Move to "completed"
   completeTodo(id: string) {
@@ -95,6 +95,13 @@ export class InProgress implements OnInit {
     this.editingId = todo.id;
     this.editedTitle = todo.title
     this.editedDescription = todo.description
+  }
+
+  openDetails(todo: any) {
+    this.selectedTodo = todo;
+  }
+  closeDetails() {
+    this.selectedTodo = null;
   }
 
   saveEdit(id: string) {
