@@ -36,6 +36,8 @@
         *ngFor="let todo of notStarted$ | async"
         cdkDrag
         [cdkDragData]="todo"
+        (cdkDragStarted)="dragStarted(todo)"
+        (cdkDragEnded)="dragEnded()"
       >
 
         <!-- EDIT MODE -->
