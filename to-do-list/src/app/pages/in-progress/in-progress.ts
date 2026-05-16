@@ -131,24 +131,28 @@ export class InProgress implements OnInit {
   this.showCompleteDrop = false;
 }
 
-  drop(event: CdkDragDrop<any[] | null, any[] | null>) {
 
+  drop(event: CdkDragDrop<any[]>) {
   const todo = event.item.data;
 
-  // move to in progress
-  if (
-    event.previousContainer.id === 'notStartedList' &&
-    event.container.id === 'inProgressList'
-  ) {
-    this.todoService.updateStatus(todo.id, 'in-progress');
+  const to = event.container.id;
+
+  switch (to) {
+    case 'inProgressList':
+      this.todoService.updateStatus(todo.id, 'in-progress');
+      break;
+
+    case 'notStartedList':
+      this.todoService.updateStatus(todo.id, 'not-started');
+      break;
+
+    case 'completedList':
+      if (todo.status === 'in-progress') {
+        this.todoService.updateStatus(todo.id, 'completed');
+      }
+      break;
   }
 
-  // move back to not started
-  if (
-    event.previousContainer.id === 'inProgressList' &&
-    event.container.id === 'notStartedList'
-  ) {
-    this.todoService.updateStatus(todo.id, 'not-started');
-  }
+  this.showCompleteDrop = false;
 }
 }
