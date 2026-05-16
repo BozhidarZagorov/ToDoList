@@ -23,6 +23,12 @@ type Todo = {
   styleUrl: './in-progress.scss',
 })
 export class InProgress implements OnInit {
+  notStartedCount = 0;
+  inProgressCount = 0;
+  selectedTodo: any = null;
+  isDragging = false;
+  placeholderList: Todo[] = [];
+  showCompleteDrop = false;
 
   // 🔹 UI state
   editingId: string | null = null;
