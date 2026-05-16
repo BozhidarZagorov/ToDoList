@@ -257,6 +257,50 @@ button:hover {
   outline: 2px dashed rgba(255,255,255,0.3);
 }
 
+.complete-drop {
+  border: 2px dashed rgba(0, 255, 100, 0.35);
+
+  background: rgba(0, 255, 100, 0.05);
+}
+
+.complete-zone {
+  min-height: 250px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1.2rem;
+  font-weight: bold;
+
+  color: #5cff89;
+}
+
+.hidden-drop {
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: 0.2s;
+}
+
+.complete-drop {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(20px);
+  transition: all 0.2s ease;
+  width: 0;
+  overflow: hidden;
+}
+
+.complete-drop.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  width: 280px;
+}
+
 .auth-warning {
   height: calc(100vh - 60px);
   display: flex;
