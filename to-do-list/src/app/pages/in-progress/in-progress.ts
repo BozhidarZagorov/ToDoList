@@ -7,6 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DragDropModule, CdkDragDrop } from '@angular/cdk/drag-drop';
 
+type Todo = {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  createdAt?: any;
+  startedAt?: any;
+};
 @Component({
   selector: 'app-in-progress',
   standalone: true,
