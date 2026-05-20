@@ -4,7 +4,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  authState
+  authState,
+  GoogleAuthProvider,
+  signInWithPopup
 } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 
@@ -26,8 +28,14 @@ export class Auths {
   login(email: string, password: string) {
     return signInWithEmailAndPassword(this.auth, email, password);
   }
+  googleLogin() {
+    const provider = new GoogleAuthProvider();
+
+    return signInWithPopup(this.auth, provider);
+  }
 
   logout() {
     return signOut(this.auth);
   }
+  
 }
