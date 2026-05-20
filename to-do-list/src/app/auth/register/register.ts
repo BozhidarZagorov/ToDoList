@@ -21,4 +21,7 @@ export class RegisterComponent {
       .then(() => this.router.navigate(['/login']))
       .catch(err => console.error(err));
   }
+  googleLogin() {
+    this.auth.googleLogin()
+  }
 }

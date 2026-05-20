@@ -21,4 +21,7 @@ export class LoginComponent {
       .then(() => this.router.navigate(['/']))
       .catch(err => console.error(err));
   }
+  googleLogin() {
+    this.auth.googleLogin()
+  }
 }
