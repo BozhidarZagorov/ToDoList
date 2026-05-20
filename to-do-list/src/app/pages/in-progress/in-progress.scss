@@ -305,6 +305,8 @@ button:hover {
   height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: center; // vertical center
+  align-items: center;     // horizontal center
+  text-align: center;
+  gap: 1rem;
 }
