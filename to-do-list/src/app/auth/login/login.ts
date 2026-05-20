@@ -23,5 +23,7 @@ export class LoginComponent {
   }
   googleLogin() {
     this.auth.googleLogin()
+      .then(() => this.router.navigate(['/']))
+      .catch(err => console.error(err));
   }
 }
