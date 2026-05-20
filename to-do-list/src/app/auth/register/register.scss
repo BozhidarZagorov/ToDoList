@@ -67,3 +67,55 @@
 .auth-card button:hover {
   background: #ffa600;
 }
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+
+  margin-top: 0.5rem;
+}
+
+.button-group button {
+  width: 140px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  padding: 0.8rem;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  color: white;
+  font-weight: 600;
+
+  transition: 0.2s;
+}
+
+.button-group img {
+  width: 20px;
+  height: 20px;
+}
+
+.login-btn,
+.register-btn {
+  background: #e1880c;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+  background: #ffa600;
+}
+
+.google-btn {
+  background: #0545ad !important;
+}
+
+.google-btn:hover {
+  background: #5b9cff !important;
+}
