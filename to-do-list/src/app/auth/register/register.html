@@ -1,6 +1,20 @@
-<h2>Register</h2>
+<div class="auth-container">
+  <div class="auth-card">
 
-<input [(ngModel)]="email" placeholder="Email" />
-<input [(ngModel)]="password" type="password" placeholder="Password" />
+    <h1>Register</h1>
 
-<button (click)="register()">Register</button>
+    <input
+      [(ngModel)]="email"
+      placeholder="Email"
+    />
+
+    <input
+      [(ngModel)]="password"
+      type="password"
+      placeholder="Password"
+    />
+
+    <button (click)="register()">Register</button>
+
+  </div>
+</div>
