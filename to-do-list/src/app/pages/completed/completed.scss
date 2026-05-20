@@ -67,17 +67,21 @@
 
 /* BUTTONS */
 button {
-  border: none;
+  margin-right: 0.4rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 10px;
-
-  padding: 0.5rem 0.9rem;
-
+  border: none;
   cursor: pointer;
 
+  background: #e1880c;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
 
-  transition: 0.2s ease;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #ffa600;
 }
 
 /* UNDO */
@@ -99,6 +103,7 @@ button {
 }
 
 .auth-warning {
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   justify-content: center; // vertical center
