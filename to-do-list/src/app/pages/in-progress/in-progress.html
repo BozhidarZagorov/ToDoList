@@ -19,13 +19,14 @@
   <div class="board">
     <!-- 🟡 NOT STARTED -->
     <div
-      class="column"
-      cdkDropList
-      id="notStartedList"
-      *ngIf="(notStarted$ | async) as notStarted"
-      [cdkDropListData]="notStarted"
-      [cdkDropListConnectedTo]="['inProgressList']"
-      (cdkDropListDropped)="drop($event)"
+        class="column hidden-drop"
+        [class.visible]="notStartedCount > 0 || showNotStartedDrop"
+        cdkDropList
+        id="notStartedList"
+        *ngIf="(notStarted$ | async) as notStarted"
+        [cdkDropListData]="notStarted"
+        [cdkDropListConnectedTo]="['inProgressList']"
+        (cdkDropListDropped)="drop($event)"
       >
       <h3>Not Started</h3>
       <div
