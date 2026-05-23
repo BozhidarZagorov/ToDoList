@@ -3,40 +3,48 @@
   <div class="page-wrapper">
 
     <div class="column">
+
       <h2>Completed Tasks</h2>
 
-      <div class="todo-card" *ngFor="let todo of todos$ | async">
+      <ng-container *ngIf="todos$ | async as todos">
 
-        <h4>{{ todo.title }}</h4>
-
-          <p class="description">
-            {{ todo.description }}
-          </p>
-
-          <p class="date">
-              Added:
-              {{ todo.createdAt?.toDate() | date:'medium' }}
-          </p>
-          <p class="date">
-             Started:
-             {{ todo.startedAt?.toDate() | date:'medium' }}
-          </p>
-          <p class="date">
-            Finished:
-            {{ todo.completedAt?.toDate() | date:'medium' }}
-          </p>
-
-        <div class="buttons">
-          <button class="back-btn" (click)="undoTodo(todo.id)">
-            ↩ Undo
-          </button>
-
-          <button class="delete-btn" (click)="deleteTodo(todo.id)">
-            🗑️ Delete
-          </button>
+        <!-- EMPTY STATE -->
+        <div class="empty-state" *ngIf="todos.length === 0">
+          <h3>Nothing completed yet 📭</h3>
+          <p>Completed tasks will show up here when you finish them.</p>
         </div>
 
-      </div>
+        <!-- TASKS -->
+        <ng-container *ngIf="todos.length > 0">
+          <div class="todo-card" *ngFor="let todo of todos">
+
+            <h4>{{ todo.title }}</h4>
+
+            <p class="description">{{ todo.description }}</p>
+
+            <p class="date">
+              Added: {{ todo.createdAt?.toDate() | date:'medium' }}
+            </p>
+
+            <p class="date">
+              Started: {{ todo.startedAt?.toDate() | date:'medium' }}
+            </p>
+
+            <p class="date">
+              Finished: {{ todo.completedAt?.toDate() | date:'medium' }}
+            </p>
+
+            <div class="buttons">
+              <button class="back-btn" (click)="undoTodo(todo.id)">↩ Undo</button>
+              <button class="delete-btn" (click)="deleteTodo(todo.id)">🗑️ Delete</button>
+            </div>
+
+          </div>
+        </ng-container>
+
+      </ng-container>
+      
+
     </div>
 
   </div>
@@ -46,10 +54,7 @@
 <ng-template #notLogged>
   <div class="auth-warning">
     <h2>Please log in</h2>
-
-    <p>
-      Please login to view your todo list or register if you don’t have an account yet.
-    </p>
+    <p>Please login to view your todo list or register if you don’t have an account yet.</p>
 
     <button routerLink="/login">Login</button>
     <button routerLink="/register">Register</button>
