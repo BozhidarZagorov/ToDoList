@@ -50,3 +50,27 @@ button {
 button:hover {
   background: #ffa600;
 }
+
+.catone {
+  position: fixed;
+  top: 160px;
+  width: 64px;
+  height: 64px;
+
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.run-cat {
+  background-image: url('../../../../public/catrun.png');
+
+  animation:
+    runFrames 0.7s steps(7) infinite,
+    moveAcross 10s linear infinite;
+}
+@keyframes runFrames {
+  from { background-position: 0 0; }
+  to { background-position: -448px 0; }
+}
+
+}
