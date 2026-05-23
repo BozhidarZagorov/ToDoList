@@ -72,11 +72,13 @@
   align-items: flex-start;
 
   gap: 2rem;
+
   padding: 2rem;
+
+  width: 100%;
 
   flex-wrap: wrap;
 }
-
 
 .column {
   width: 280px;
@@ -91,6 +93,10 @@
   backdrop-filter: blur(12px);
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 h3 {
@@ -276,15 +282,6 @@ button:hover {
   color: #5cff89;
 }
 
-.hidden-drop {
-  opacity: 0;
-  pointer-events: none;
-  width: 0;
-  padding: 0;
-  overflow: hidden;
-  transition: 0.2s;
-}
-
 .complete-drop {
   opacity: 0;
   pointer-events: none;
@@ -299,6 +296,33 @@ button:hover {
   pointer-events: auto;
   transform: translateX(0);
   width: 280px;
+}
+
+.hidden-drop {
+  opacity: 0;
+  display: none;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  transform: scale(0.95);
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+}
+
+.hidden-drop.visible {
+  opacity: 1;
+  display: block;
+
+  visibility: visible;
+
+  pointer-events: auto;
+
+  transform: scale(1);
 }
 
 .auth-warning {
