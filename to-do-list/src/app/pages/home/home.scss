@@ -86,6 +86,28 @@ button:hover {
     moveAcross 14s linear infinite;
 }
 
+.small-cat {
+  position: fixed;
+  bottom: 10px;
+  left: -50px;
+
+  width: 48px;
+  height: 45px;
+
+  background-image: url('../../../../public/catwalk.png');
+  background-size: 384px 45px;
+
+  background-repeat: no-repeat;
+
+  image-rendering: pixelated;
+
+  overflow: hidden;
+
+  animation:
+    smallCatWalk 0.8s steps(8) infinite,
+    moveSmallCat 18s linear infinite;
+}
+
 @keyframes runFrames {
   from { background-position: 0 0; }
   to { background-position: -448px 0; }
@@ -95,4 +117,25 @@ button:hover {
   from { background-position: 0 0; }
   to { background-position: -448px 0; }
 }
+@keyframes smallCatWalk {
+  from { background-position: 0 0; }
+  to { background-position: -384px 0; }
+}
+
+@keyframes moveAcross {
+  from {
+    transform: translateX(-100px);
+  }
+  to {
+    transform: translateX(120vw);
+  }
+}
+@keyframes moveSmallCat {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(120vw);
+  }
 }
