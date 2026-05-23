@@ -1,17 +1,23 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background-color: #1e1e1e;
-  color: white;
   position: sticky;
   top: 0;
-  width: 100%;
+  left: 0;
+
   height: 60px;
-  box-sizing: border-box;
-  z-index: 1000;
+  width: 100%;
+  z-index: 9999;
+
+  background-color: #1e1e1e;
+  color: white;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 20px;
+
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+
+  box-sizing: border-box;
 }
 
 .navbar-left .logo {
