@@ -80,7 +80,7 @@
       (cdkDropListDropped)="drop($event)"
       >
       <h3>In Progress</h3>
-      <div class="empty-column" *ngIf="inProgressCount === 0">
+      <div *ngIf="inProgressCount === 0" class="empty-column">
         Drop tasks here
       </div>
       <div
