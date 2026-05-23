@@ -72,13 +72,14 @@
 
     <!-- 🔵 IN PROGRESS -->
     <div
-      class="column"
-      cdkDropList
-      id="inProgressList"
-      *ngIf="(inProgress$ | async) as inProgress"
-      [cdkDropListData]="inProgress"
-      [cdkDropListConnectedTo]="['notStartedList', 'completedList']"
-      (cdkDropListDropped)="drop($event)"
+        class="column hidden-drop"
+        [class.visible]="inProgressCount > 0 || showInProgressDrop"
+        cdkDropList
+        id="inProgressList"
+        *ngIf="(inProgress$ | async) as inProgress"
+        [cdkDropListData]="inProgress"
+        [cdkDropListConnectedTo]="['notStartedList', 'completedList']"
+        (cdkDropListDropped)="drop($event)"
       >
       <h3>In Progress</h3>
       <div *ngIf="inProgressCount === 0" class="empty-column">
