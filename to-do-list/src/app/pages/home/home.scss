@@ -61,6 +61,16 @@ button:hover {
   pointer-events: none;
 }
 
+.cattwo {
+  position: fixed;
+  top: 380px;
+  width: 64px;
+  height: 64px;
+
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
 .run-cat {
   background-image: url('../../../../public/catrun.png');
 
@@ -68,9 +78,21 @@ button:hover {
     runFrames 0.7s steps(7) infinite,
     moveAcross 10s linear infinite;
 }
+.walk-cat {
+  background-image: url('../../../../public/catwalk2.png');
+
+  animation:
+    walkFrames 0.7s steps(7) infinite,
+    moveAcross 14s linear infinite;
+}
+
 @keyframes runFrames {
   from { background-position: 0 0; }
   to { background-position: -448px 0; }
 }
 
+@keyframes walkFrames {
+  from { background-position: 0 0; }
+  to { background-position: -448px 0; }
+}
 }
