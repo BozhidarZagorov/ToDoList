@@ -29,6 +29,9 @@ export class InProgress implements OnInit {
   isDragging = false;
   placeholderList: Todo[] = [];
   showCompleteDrop = false;
+  showNotStartedDrop = false;
+  showInProgressDrop = false;
+  
 
   // 🔹 UI state
   editingId: string | null = null;
@@ -121,15 +124,28 @@ export class InProgress implements OnInit {
   }
 
   dragStarted(todo: any) {
-  this.isDragging = true;
+    this.isDragging = true;
 
-  this.showCompleteDrop = todo.status === 'in-progress';
-}
+    // complete zone
+    this.showCompleteDrop = todo.status === 'in-progress';
+
+    // show hidden target columns while dragging
+    if (todo.status === 'not-started') {
+      this.showInProgressDrop = true;
+    }
+
+    if (todo.status === 'in-progress') {
+      this.showNotStartedDrop = true;
+    }
+  }
 
   dragEnded() {
-  this.isDragging = false;
-  this.showCompleteDrop = false;
-}
+    this.isDragging = false;
+
+    this.showCompleteDrop = false;
+    this.showNotStartedDrop = false;
+    this.showInProgressDrop = false;
+  }
 
 
   drop(event: CdkDragDrop<any[]>) {
