@@ -1,5 +1,6 @@
 .home-container {
   height: calc(100vh - 60px);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,14 +8,22 @@
 
 .home-card {
   background: rgba(255, 255, 255, 0.1);
+
   backdrop-filter: blur(12px);
+
   border-radius: 20px;
+
   padding: 2rem 8rem;
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 
   text-align: center;
+
   color: white;
+
+  z-index: 5;
+
+  position: relative;
 }
 
 h1 {
@@ -23,25 +32,33 @@ h1 {
 
 h2 {
   margin-bottom: 1.5rem;
+
   font-weight: 400;
+
   opacity: 0.9;
 }
 
 p {
   margin: 1rem 0;
+
   font-size: 1.2rem;
 }
 
 button {
   margin-top: 0.5rem;
   margin-left: 0.8rem;
+
   padding: 0.6rem 1.2rem;
+
   border-radius: 10px;
   border: none;
+
   cursor: pointer;
 
   background: #e1880c;
+
   color: white;
+
   font-weight: 500;
 
   transition: 0.2s;
@@ -51,51 +68,14 @@ button:hover {
   background: #ffa600;
 }
 
-.catone {
+/* =========================
+   BASE CAT CLASS
+========================= */
+
+.cat {
   position: fixed;
-  top: 160px;
-  width: 64px;
-  height: 64px;
 
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-
-.cattwo {
-  position: fixed;
-  top: 380px;
-  width: 64px;
-  height: 64px;
-
-  background-repeat: no-repeat;
-  pointer-events: none;
-}
-
-.run-cat {
-  background-image: url('../../../../public/catrun.png');
-
-  animation:
-    runFrames 0.7s steps(7) infinite,
-    moveAcross 10s linear infinite;
-}
-.walk-cat {
-  background-image: url('../../../../public/catwalk2.png');
-
-  animation:
-    walkFrames 0.7s steps(7) infinite,
-    moveAcross 14s linear infinite;
-}
-
-.small-cat {
-  position: fixed;
-  bottom: 10px;
-  left: -50px;
-
-  width: 48px;
-  height: 45px;
-
-  background-image: url('../../../../public/catwalk.png');
-  background-size: 384px 45px;
+  left: -100px;
 
   background-repeat: no-repeat;
 
@@ -103,34 +83,272 @@ button:hover {
 
   overflow: hidden;
 
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/* =========================
+   BIG RUNNING CAT
+========================= */
+
+.catone {
+  @extend .cat;
+
+  top: 160px;
+
+  width: 64px;
+  height: 64px;
+
+  background-image: url('../../../../public/catrun.png');
+
   animation:
-    smallCatWalk 0.8s steps(8) infinite,
-    moveSmallCat 18s linear infinite;
+    runFrames 0.7s steps(7) infinite,
+    moveAcross 10s linear infinite;
 }
 
 @keyframes runFrames {
-  from { background-position: 0 0; }
-  to { background-position: -448px 0; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -448px 0;
+  }
+}
+
+/* =========================
+   BIG WALKING CAT
+========================= */
+
+.cattwo {
+  @extend .cat;
+
+  top: 380px;
+
+  width: 64px;
+  height: 64px;
+
+  background-image: url('../../../../public/catwalk2.png');
+
+  animation:
+    walkFrames 0.7s steps(7) infinite,
+    moveAcross 14s linear infinite;
 }
 
 @keyframes walkFrames {
-  from { background-position: 0 0; }
-  to { background-position: -448px 0; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -448px 0;
+  }
 }
+
+/* =========================
+   SMALL WALK CAT
+========================= */
+
+.small-cat {
+  @extend .cat;
+
+  bottom: 10px;
+
+  width: 48px;
+  height: 45px;
+
+  background-image: url('../../../../public/catwalk.png');
+
+  background-size: 384px 45px;
+
+  animation:
+    smallCatWalk 0.8s steps(8) infinite,
+    moveSmallCat 30s linear infinite;
+}
+
 @keyframes smallCatWalk {
-  from { background-position: 0 0; }
-  to { background-position: -384px 0; }
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -384px 0;
+  }
 }
+
+/* =========================
+   SMALL RUN CAT
+========================= */
+
+.catsmallrun {
+  @extend .cat;
+
+  bottom: 110px;
+
+  width: 48px;
+  height: 42px;
+
+  background-image: url('../../../../public/orangerun.png');
+
+  background-size: 288px 42px;
+
+  animation:
+    catsmallWalk 0.7s steps(6) infinite,
+    catsmallMove 15s linear infinite;
+}
+
+@keyframes catsmallWalk {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -288px 0;
+  }
+}
+
+/* =========================
+   SNEAK CAT
+========================= */
+
+.catrun {
+  @extend .cat;
+
+  bottom: 200px;
+
+  width: 48px;
+  height: 42px;
+
+  background-image: url('../../../../public/run.png');
+
+  background-size: 288px 42px;
+
+  animation:
+    catSneakWalk 0.7s steps(6) infinite,
+    catSneakMove 16s linear infinite;
+}
+
+@keyframes catSneakWalk {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -288px 0;
+  }
+}
+
+/* =========================
+   CAT 5
+========================= */
+
+.catsneak {
+  @extend .cat;
+
+  bottom: 630px;
+
+  width: 48px;
+  height: 42px;
+
+  background-image: url('../../../../public/sneak.png');
+
+  background-size: 384px 42px;
+
+  animation:
+    cat5Walk 0.8s steps(8) infinite,
+    cat5Move 30s linear infinite;
+}
+
+.catblueeye {
+  @extend .cat;
+
+  bottom: 580px;
+
+  width: 48px;
+  height: 42px;
+
+  background-image: url('../../../../public/sneakblueeye.png');
+
+  background-size: 384px 42px;
+
+  animation:
+    cat5Walk 0.8s steps(8) infinite,
+    cat5Move 35s linear infinite;
+}
+
+.catorangesneak {
+  @extend .cat;
+
+  bottom: 390px;
+
+  width: 48px;
+  height: 42px;
+
+  background-image: url('../../../../public/sneek.png');
+
+  background-size: 384px 42px;
+
+  animation:
+    cat5Walk 0.8s steps(8) infinite,
+    cat5Move 45s linear infinite;
+}
+
+@keyframes cat5Walk {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: -384px 0;
+  }
+}
+
+/* =========================
+   SHARED MOVEMENT
+========================= */
 
 @keyframes moveAcross {
   from {
     transform: translateX(-100px);
   }
+
   to {
     transform: translateX(120vw);
   }
 }
+
 @keyframes moveSmallCat {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(120vw);
+  }
+}
+
+@keyframes catsmallMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(120vw);
+  }
+}
+
+@keyframes catSneakMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(120vw);
+  }
+}
+
+@keyframes cat5Move {
   from {
     transform: translateX(0);
   }
