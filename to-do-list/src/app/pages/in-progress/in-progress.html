@@ -1,19 +1,11 @@
 <ng-container *ngIf="auth.user$ | async as user; else notLogged">
 
-  <!-- ADD TODO -->
-  <div class="top-bar">
-    <input
-      class="glass-input"
-      [(ngModel)]="newTitle"
-      placeholder="Task title..."
-    />
-    <textarea
-      class="glass-input"
-      [(ngModel)]="newDescription"
-      placeholder="Task description..."
-    ></textarea>
-    <button (click)="addTodo()">Add</button>
-  </div>
+<!-- ADD TODO BUTTON -->
+<div class="add-todo-wrapper">
+  <button class="add-open-btn" (click)="showAddModal = true">
+    ＋ Add Todo
+  </button>
+</div>
 
   <!-- BOARD -->
   <div class="board">
