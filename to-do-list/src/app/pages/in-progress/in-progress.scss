@@ -200,6 +200,60 @@ textarea {
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
+.add-modal {
+  width: 500px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 1rem;
+}
+
+.add-modal textarea {
+  min-height: 140px;
+}
+
+.add-btn {
+  padding: 0.8rem;
+  align-self: center;
+  width: 35%;
+}
+
+
+.modal-header {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 1.5rem;
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+
+  position: absolute;
+  right: 0;
+
+  padding: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 0.9rem;
+
+  border-radius: 8px;
+
+  background: #d63031;
+}
+
+.close-btn:hover {
+  background: #ff4d4f;
+}
+
 button {
   margin-right: 0.4rem;
   padding: 0.4rem 0.8rem;
