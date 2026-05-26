@@ -136,6 +136,44 @@
     
   </div>
   
+  <!-- ADD TODO MODAL -->
+<div class="modal-overlay" *ngIf="showAddModal">
+
+  <div class="modal add-modal">
+
+    <div class="modal-header">
+
+      <h2>Create New Todo</h2>
+
+      <button
+        class="close-btn"
+        (click)="showAddModal = false"
+      >
+        ✖
+      </button>
+
+    </div>
+
+    <input
+      class="glass-input"
+      [(ngModel)]="newTitle"
+      placeholder="Task title..."
+    />
+
+    <textarea
+      class="glass-input"
+      [(ngModel)]="newDescription"
+      placeholder="Task description..."
+    ></textarea>
+
+    <button class="done-btn add-btn" (click)="addTodo()">
+      Add Todo
+    </button>
+
+  </div>
+
+</div>
+
   <div class="modal-overlay" *ngIf="selectedTodo">
 
   <div class="modal">
