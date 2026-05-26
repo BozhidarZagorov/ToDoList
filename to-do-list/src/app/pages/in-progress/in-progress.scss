@@ -1,14 +1,15 @@
-.top-bar {
+.add-todo-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
 
-  align-items: center;
+  margin-top: 0.9rem;
+}
 
-  gap: 1rem;
+.add-open-btn {
+  padding: 0.8rem 1rem;
 
-  margin: 1.5rem auto;
-
-  width: 400px;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .glass-input {
@@ -22,6 +23,7 @@
 
   color: white;
   font-size: 1rem;
+  text-align: center;
 
   outline: none;
 
