@@ -31,6 +31,7 @@ export class InProgress implements OnInit {
   showCompleteDrop = false;
   showNotStartedDrop = false;
   showInProgressDrop = false;
+  showAddModal = false;
   
 
   // 🔹 UI state
@@ -68,6 +69,7 @@ export class InProgress implements OnInit {
   addTodo() {
     if (!this.newTitle.trim()) return;
     if (!this.newDescription.trim()) return;
+    this.showAddModal = false;
 
     this.todoService.addTodo(this.newTitle,this.newDescription);
     this.newTitle = '';
