@@ -173,26 +173,54 @@
   </div>
 
 </div>
-
+  
+  <!-- DETAILS MODAL -->
   <div class="modal-overlay" *ngIf="selectedTodo">
 
-  <div class="modal">
+    <div class="modal details-modal">
 
-    <button class="delete-btn" (click)="closeDetails()">✖</button>
+      <button class="delete-btn" (click)="closeDetails()">✖</button>
 
-    <h2>Title: {{ selectedTodo.title }}</h2>
+      <!-- TITLE -->
+      <div class="details-section">
+        <h3 class="details-label">Title</h3>
 
-    <p>Description: {{ selectedTodo.description }}</p>
+        <p class="details-value">
+          {{ selectedTodo.title }}
+        </p>
+      </div>
 
-    <p>Created: {{ selectedTodo.createdAt?.toDate() | date }}</p>
+      <div class="details-divider"></div>
 
-    <p *ngIf="selectedTodo.startedAt">
-      Started: {{ selectedTodo.startedAt?.toDate() | date }}
-    </p>
+      <!-- DESCRIPTION -->
+      <div class="details-section">
+        <h3 class="details-label">Description</h3>
+
+        <p class="details-value">
+          {{ selectedTodo.description }}
+        </p>
+      </div>
+
+      <div class="details-divider"></div>
+
+      <!-- DATES -->
+      <div class="details-section">
+
+        <p class="date">
+          Created:
+          {{ selectedTodo.createdAt?.toDate() | date:'medium' }}
+        </p>
+
+        <p class="date" *ngIf="selectedTodo.startedAt">
+          Started:
+          {{ selectedTodo.startedAt?.toDate() | date:'medium' }}
+        </p>
+
+      </div>
+
+    </div>
 
   </div>
-
-</div>
 
 </ng-container>
 
