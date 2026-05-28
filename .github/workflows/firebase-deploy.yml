@@ -20,17 +20,21 @@ jobs:
 
       - name: Create environment file
         run: |
-          mkdir -p src/environments
+          mkdir -p to-do-list/src/environments
           echo "${{ secrets.FIREBASE_ENV }}" > src/environments/environment.ts
 
       - name: Install dependencies
+        mkdir -p to-do-list
         run: npm install
 
       - name: Build Angular app
+        mkdir -p to-do-list
         run: npm run build
 
       - name: Install Firebase CLI
+        mkdir -p to-do-list
         run: npm install -g firebase-tools
 
       - name: Deploy to Firebase
+        mkdir -p to-do-list
         run: firebase deploy --only hosting --token "${{ secrets.FIREBASE_TOKEN }}"
