@@ -43,3 +43,6 @@ __screenshots__/
 Thumbs.db
 environments
 src/fiebaseconfig.js
+
+
+.firebase
