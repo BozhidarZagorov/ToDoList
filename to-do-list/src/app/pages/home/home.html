@@ -5,8 +5,10 @@
 
     <p>
       You have 
+      <strong>{{ notStartedCount$ | async }}</strong> 
+      not started tasks and
       <strong>{{ inProgressCount$ | async }}</strong> 
-      todo tasks
+      tasks in progress 
     </p>
 
     <button routerLink="/in-progress">View In Progress</button>
