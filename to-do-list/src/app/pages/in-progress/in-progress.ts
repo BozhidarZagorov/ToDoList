@@ -32,10 +32,13 @@ export class InProgress implements OnInit {
   showNotStartedDrop = false;
   showInProgressDrop = false;
   showAddModal = false;
+  showEditModal = false;
   
 
   // 🔹 UI state
   editingId: string | null = null;
+  editingTodoId: string | null = null;
+
   editedTitle = '';
   editedDescription = '';
   newTitle = '';
@@ -97,9 +100,12 @@ export class InProgress implements OnInit {
 
   // 🔹 Edit
   startEdit(todo: any) {
-    this.editingId = todo.id;
-    this.editedTitle = todo.title
-    this.editedDescription = todo.description
+    this.editingTodoId = todo.id;
+
+    this.editedTitle = todo.title;
+    this.editedDescription = todo.description;
+
+    this.showEditModal = true;
   }
 
   openDetails(todo: any) {
@@ -109,18 +115,28 @@ export class InProgress implements OnInit {
     this.selectedTodo = null;
   }
 
-  saveEdit(id: string) {
+  saveEdit() {
     if (!this.editedTitle.trim()) return;
     if (!this.editedDescription.trim()) return;
+    if (!this.editingTodoId) return;
 
-    this.todoService.updateTodo(id, this.editedTitle, this.editedDescription);
-    this.editingId = null;
+    this.todoService.updateTodo(
+      this.editingTodoId,
+      this.editedTitle,
+      this.editedDescription
+    );
+
+    this.showEditModal = false;
+    this.editingTodoId = null;
+
     this.editedTitle = '';
     this.editedDescription = '';
   }
 
   cancelEdit() {
-    this.editingId = null;
+    this.showEditModal = false;
+    this.editingTodoId = null;
+
     this.editedTitle = '';
     this.editedDescription = '';
   }

@@ -30,18 +30,9 @@
         (cdkDragEnded)="dragEnded()"
       >
 
-        <!-- EDIT MODE -->
-         <div class="edit-field">
-           <div *ngIf="editingId === todo.id; else viewModeLeft">
-             <input class="glass-input" [(ngModel)]="editedTitle" />
-             <input class="glass-input" [(ngModel)]="editedDescription" />
-             <button (click)="saveEdit(todo.id)">Save</button>
-             <button (click)="cancelEdit()">Cancel</button>
-            </div>
-          </div>
 
         <!-- VIEW MODE -->
-        <ng-template #viewModeLeft>
+
           <h4>{{ todo.title }}</h4>
 
             <p class="description">
@@ -57,7 +48,6 @@
           <button (click)="openDetails(todo)">📋 Details</button>
           <button class="edit-btn" (click)="startEdit(todo)">✏️ Edit</button>
           <button class="delete-btn" (click)="deleteTodo(todo.id)">🗑️ Delete</button>
-        </ng-template>
 
       </div>
     </div>
@@ -74,9 +64,7 @@
         (cdkDropListDropped)="drop($event)"
       >
       <h3>In Progress</h3>
-      <div *ngIf="inProgressCount === 0" class="empty-column">
-        Drop tasks here
-      </div>
+
       <div
         class="todo-card"
         *ngFor="let todo of inProgress$ | async"
@@ -87,17 +75,9 @@
       >
 
         <!-- EDIT MODE -->
-         <div class="edit-field">
-           <div *ngIf="editingId === todo.id; else viewModeRight">
-             <input class="glass-input" [(ngModel)]="editedTitle" />
-             <input class="glass-input" [(ngModel)]="editedDescription" />
-             <button class="done-btn" (click)="saveEdit(todo.id)">Save</button>
-             <button class="delete-btn" (click)="cancelEdit()">Cancel</button>
-            </div>
-          </div>
+
 
         <!-- VIEW MODE -->
-        <ng-template #viewModeRight>
           <p>{{ todo.title }}</p>
 
            <p class="description">
@@ -117,7 +97,6 @@
           <button class="edit-btn" (click)="startEdit(todo)">✏️ Edit</button>
           <button (click)="openDetails(todo)">📋 Details</button>
           <button class="delete-btn" (click)="deleteTodo(todo.id)">🗑️ Delete</button>
-        </ng-template>
 
       </div>
       
@@ -168,6 +147,48 @@
 
     <button class="done-btn add-btn" (click)="addTodo()">
       Add Todo
+    </button>
+
+  </div>
+
+</div>
+
+
+   <!-- EDIT TODO MODAL -->
+<div class="modal-overlay" *ngIf="showEditModal">
+
+  <div class="modal add-modal">
+
+    <div class="modal-header">
+
+      <h2>Edit Todo</h2>
+
+      <button
+        class="close-btn"
+        (click)="cancelEdit()"
+      >
+        ✖
+      </button>
+
+    </div>
+
+    <input
+      class="glass-input"
+      [(ngModel)]="editedTitle"
+      placeholder="Task title..."
+    />
+
+    <textarea
+      class="glass-input"
+      [(ngModel)]="editedDescription"
+      placeholder="Task description..."
+    ></textarea>
+
+    <button
+      class="done-btn add-btn"
+      (click)="saveEdit()"
+    >
+      Save Changes
     </button>
 
   </div>
