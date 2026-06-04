@@ -18,11 +18,15 @@ export class Home {
   private todoService = inject(TodoService);
 
   user$ = this.auth.user$;
-
+  notStartedCount$!: Observable<number>;
   inProgressCount$!: Observable<number>;
   completedCount$!: Observable<number>;
 
   constructor() {
+    this.notStartedCount$ = this.todoService.getTodosByStatus('not-started').pipe(
+      map(todos => todos.length)
+    );
+
     this.inProgressCount$ = this.todoService.getTodosByStatus('in-progress').pipe(
       map(todos => todos.length)
     );
