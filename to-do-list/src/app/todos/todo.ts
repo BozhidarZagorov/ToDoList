@@ -27,26 +27,28 @@ export class TodoService {
 
   // 🔹 Add todo
   addTodo(title: string, description: string) {
-  const user = this.auth.currentUser;
-  if (!user) return;
+    const user = this.auth.currentUser;
 
-  const todosRef = collection(this.firestore, 'todos');
+    if (!user) return;
 
-  return addDoc(todosRef, {
-    title,
-    description,
+    const todosRef = collection(
+      this.firestore,
+      `users/${user.uid}/todos`
+    );
 
-    status: 'not-started',
+    return addDoc(todosRef, {
+      title,
+      description,
 
-    userId: user.uid,
+      status: 'not-started',
 
-    createdAt: new Date(),
-    startedAt: null,
-    completedAt: null
-  });
-}
+      createdAt: new Date(),
+      startedAt: null,
+      completedAt: null
+    });
+  }
 
-  // 🔹 Get todos by status (MAIN QUERY)
+  // 🔹 Get todos by status
   getTodosByStatus(status: TodoStatus): Observable<any[]> {
     return runInInjectionContext(this.injector, () =>
       authState(this.auth).pipe(
@@ -54,62 +56,87 @@ export class TodoService {
           if (!user) return of([]);
 
           return runInInjectionContext(this.injector, () => {
-            const todosRef = collection(this.firestore, 'todos');
+
+            const todosRef = collection(
+              this.firestore,
+              `users/${user.uid}/todos`
+            );
 
             const q = query(
               todosRef,
-              where('userId', '==', user.uid),
               where('status', '==', status)
             );
 
-            return collectionData(q, { idField: 'id' }) as Observable<any[]>;
+            return collectionData(q, {
+              idField: 'id'
+            }) as Observable<any[]>;
           });
         })
       )
     );
   }
 
-  // 🔹 Update status (move between columns)
+  // 🔹 Update status
   updateStatus(id: string, status: TodoStatus) {
-  const todoRef = doc(this.firestore, `todos/${id}`);
+    const user = this.auth.currentUser;
 
-  const data: any = {
-    status
-  };
+    if (!user) return;
 
-  // when task starts
-  if (status === 'in-progress') {
-    data.startedAt = new Date();
+    const todoRef = doc(
+      this.firestore,
+      `users/${user.uid}/todos/${id}`
+    );
+
+    const data: any = {
+      status
+    };
+
+    if (status === 'in-progress') {
+      data.startedAt = new Date();
+    }
+
+    if (status === 'completed') {
+      data.completedAt = new Date();
+    }
+
+    if (status === 'not-started') {
+      data.startedAt = null;
+      data.completedAt = null;
+    }
+
+    return updateDoc(todoRef, data);
   }
-
-  // when task completes
-  if (status === 'completed') {
-    data.completedAt = new Date();
-  }
-
-  // when moved back to not-started
-  if (status === 'not-started') {
-    data.startedAt = null;
-    data.completedAt = null;
-  }
-
-  return updateDoc(todoRef, data);
-}
 
   // 🔹 Delete todo
   deleteTodo(id: string) {
-    return deleteDoc(doc(this.firestore, `todos/${id}`));
+    const user = this.auth.currentUser;
+
+    if (!user) return;
+
+    return deleteDoc(
+      doc(
+        this.firestore,
+        `users/${user.uid}/todos/${id}`
+      )
+    );
   }
 
- // 🔹 Edit todo
+  // 🔹 Edit todo
   updateTodo(
     id: string,
     title: string,
     description: string
   ) {
-    const todoDoc = doc(this.firestore, `todos/${id}`);
+    const user = this.auth.currentUser;
 
-    return updateDoc(todoDoc, {
+    if (!user) return;
+
+    const todoRef = doc(
+      this.firestore,
+      `users/${user.uid}/todos/${id}`
+    );
+
+    return updateDoc(todoRef, {
       title,
       description
     });
